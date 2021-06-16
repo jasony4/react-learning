@@ -1,4 +1,6 @@
-import ExpenseItem from "./components/ExpenseItem";
+import ExpenseItem from "./components/Expenses/ExpenseItem/ExpenseItem";
+import "./components/Expenses/Expenses.css";
+import Card from "./components/Card/Card";
 
 function App() {
   const expenses = [
@@ -17,7 +19,7 @@ function App() {
     />
   ));
 
-  return <div>{mappedExpenses}</div>;
+  return <Card className="expenses">{mappedExpenses}</Card>;
 }
 
 export default App;
