@@ -1,12 +1,14 @@
 import ExpenseItem from "./components/Expenses/ExpenseItem/ExpenseItem";
 import "./components/Expenses/Expenses.css";
 import Card from "./components/Card/Card";
+import NewExpense from "./components/NewExpense/NewExpense";
+import React from "react";
 
 function App() {
   const expenses = [
     { date: new Date(2021, 2, 20), title: "Desk", amount: 75.99 },
     { date: new Date(2021, 2, 11), title: "Breakfast", amount: 10.99 },
-    { date: new Date(2021, 4, 23), title: "Coffee", amount: 2.36 },
+    { date: new Date(2021, 4, 23), title: "Not coffee", amount: 2.36 },
     { date: new Date(2021, 5, 10), title: "Alcohol", amount: 250.5 },
   ];
 
@@ -19,7 +21,12 @@ function App() {
     />
   ));
 
-  return <Card className="expenses">{mappedExpenses}</Card>;
+  return (
+    <>
+      <NewExpense />
+      <Card className="expenses">{mappedExpenses}</Card>
+    </>
+  );
 }
 
 export default App;
