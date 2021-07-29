@@ -1,30 +1,34 @@
-import ExpenseItem from "./components/Expenses/ExpenseItem/ExpenseItem";
-import "./components/Expenses/Expenses.css";
-import Card from "./components/Card/Card";
-import NewExpense from "./components/NewExpense/NewExpense";
 import React from "react";
+import NewExpense from "./components/NewExpense/NewExpense";
+import Expenses from "./components/Expenses/Expenses";
 
 function App() {
   const expenses = [
-    { date: new Date(2021, 2, 20), title: "Desk", amount: 75.99 },
-    { date: new Date(2021, 2, 11), title: "Breakfast", amount: 10.99 },
-    { date: new Date(2021, 4, 23), title: "Not coffee", amount: 2.36 },
-    { date: new Date(2021, 5, 10), title: "Alcohol", amount: 250.5 },
+    { date: new Date(2021, 2, 20), title: "Desk", amount: 75.99, id: "e1" },
+    {
+      date: new Date(2021, 2, 11),
+      title: "Breakfast",
+      amount: 10.99,
+      id: "e2",
+    },
+    {
+      date: new Date(2021, 4, 23),
+      title: "Not coffee",
+      amount: 2.36,
+      id: "e3",
+    },
+    { date: new Date(2021, 5, 10), title: "Alcohol", amount: 250.5, id: "e4" },
   ];
 
-  const mappedExpenses = expenses.map((expense, idx) => (
-    <ExpenseItem
-      key={idx}
-      date={expense.date}
-      title={expense.title}
-      amount={expense.amount}
-    />
-  ));
+  const onAddNewExpenseHandler = (newExpense) => {
+    const expense = { ...newExpense };
+    console.log("in App JS", expense);
+  };
 
   return (
     <>
-      <NewExpense />
-      <Card className="expenses">{mappedExpenses}</Card>
+      <NewExpense onAddNewExpense={onAddNewExpenseHandler} />
+      <Expenses items={expenses} />
     </>
   );
 }
