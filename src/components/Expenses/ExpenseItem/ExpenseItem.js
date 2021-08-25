@@ -8,13 +8,15 @@ const ExpenseItem = (props) => {
   const day = props.date.toLocaleString("en-US", { day: "2-digit" });
   const year = props.date.getFullYear();
   return (
-    <Card className="expense-item">
-      <ExpenseDate month={month} year={year} day={day} />
-      <div className="expense-item__description">
-        <h2>{props.title}</h2>
-      </div>{" "}
-      <div className="expense-item__price">£{props.amount.toFixed(2)}</div>
-    </Card>
+    <li>
+      <Card className="expense-item">
+        <ExpenseDate month={month} year={year} day={day} />
+        <div className="expense-item__description">
+          <h2>{props.title}</h2>
+        </div>{" "}
+        <div className="expense-item__price">£{props.amount.toFixed(2)}</div>
+      </Card>
+    </li>
   );
 };
 
