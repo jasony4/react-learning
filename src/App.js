@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
+import ExpensesChart from "./components/Expenses/ExpensesChart";
 
 const DUMMY_EXPENSES = [
   { date: new Date(2021, 2, 20), title: "Desk", amount: 75.99, id: "e1" },
@@ -21,7 +22,7 @@ const DUMMY_EXPENSES = [
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [filteredExpenses, setExpenses] = useState(DUMMY_EXPENSES);
 
   const onAddNewExpenseHandler = (newExpense) => {
     setExpenses((prevExpenses) => {
@@ -32,7 +33,8 @@ function App() {
   return (
     <>
       <NewExpense onAddNewExpense={onAddNewExpenseHandler} />
-      <Expenses items={expenses} />
+      <ExpensesChart expenses={filteredExpenses} />
+      <Expenses items={filteredExpenses} />
     </>
   );
 }
