@@ -50,6 +50,15 @@ const ExpenseForm = (props) => {
     clearForm();
   };
 
+  const formIsValid = [enteredTitle, enteredDate, enteredAmount].some(
+    (value) => {
+      return value.trim().length !== 0;
+    }
+  );
+
+  console.log(enteredTitle.trim().length === 0);
+  console.log("formIsValid", formIsValid);
+
   return (
     <div>
       <form onSubmit={onSubmitHandler}>
@@ -61,6 +70,12 @@ const ExpenseForm = (props) => {
               type="text"
               name="title"
               value={enteredTitle}
+              style={{
+                border:
+                  enteredTitle.trim().length === 0
+                    ? "1px red"
+                    : "0px transparent",
+              }}
             />
           </div>
           <div className="new-expense__control">
@@ -90,7 +105,13 @@ const ExpenseForm = (props) => {
           <button type="button" onClick={props.onCancel}>
             Cancel
           </button>
-          <button type="submit">Add Expense</button>
+          <button
+            disabled={!formIsValid}
+            type="submit"
+            onClick={onSubmitHandler}
+          >
+            Add Expense
+          </button>
         </div>
       </form>
     </div>

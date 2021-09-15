@@ -26,6 +26,12 @@
   border-color: #510674;
 }
 
+.new-expense button:disabled {
+  background-color: #776081;
+  border-color: #776081;
+  cursor: default;
+}
+
 .new-expense button.alternative {
   color: #220131;
   border-color: transparent;
