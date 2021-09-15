@@ -22,8 +22,12 @@ const DUMMY_EXPENSES = [
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [filteredExpenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const [yearFilter, setYearFilter] = useState("2020");
 
+  const filteredExpenses = expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === yearFilter;
+  });
   const onAddNewExpenseHandler = (newExpense) => {
     setExpenses((prevExpenses) => {
       return [newExpense, ...prevExpenses];
@@ -34,7 +38,11 @@ function App() {
     <>
       <NewExpense onAddNewExpense={onAddNewExpenseHandler} />
       <ExpensesChart expenses={filteredExpenses} />
-      <Expenses items={filteredExpenses} />
+      <Expenses
+        yearFilter={yearFilter}
+        setYearFilter={setYearFilter}
+        items={filteredExpenses}
+      />
     </>
   );
 }
