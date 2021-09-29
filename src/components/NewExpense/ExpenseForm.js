@@ -73,7 +73,7 @@ const ExpenseForm = (props) => {
               style={{
                 border:
                   enteredTitle.trim().length === 0
-                    ? "1px red"
+                    ? "4px solid red"
                     : "0px transparent",
               }}
             />
