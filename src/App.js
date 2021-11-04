@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 import ExpensesChart from "./components/Expenses/ExpensesChart";
@@ -21,6 +22,9 @@ const DUMMY_EXPENSES = [
 ];
 
 function App() {
+  const reduxData = useSelector((state) => state);
+  const dispatch = useDispatch();
+  console.log("REDUX STATE", reduxData);
   // eslint-disable-next-line no-unused-vars
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
   const [yearFilter, setYearFilter] = useState("2020");
@@ -34,6 +38,10 @@ function App() {
     });
   };
 
+  const testDispatchHandler = () => {
+    dispatch({ type: "test" });
+  };
+
   return (
     <>
       <NewExpense onAddNewExpense={onAddNewExpenseHandler} />
@@ -43,6 +51,7 @@ function App() {
         setYearFilter={setYearFilter}
         items={filteredExpenses}
       />
+      <button onClick={testDispatchHandler}>TEST DISPATCH</button>
     </>
   );
 }
