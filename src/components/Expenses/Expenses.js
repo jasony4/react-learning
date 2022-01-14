@@ -10,6 +10,7 @@ const Expenses = (props) => {
     console.log("in Expenses.js", selectedYear);
     props.setYearFilter(selectedYear);
   };
+  console.log("state", props.state);
   console.log("Expenses.js", props.reduxExpenses);
   return (
     <Card className="expenses">
@@ -18,13 +19,14 @@ const Expenses = (props) => {
         selectedYear={props.yearFilter}
       />
       <ExpensesList items={props.items} />
-      <button onClick={props.testAction}>CLICK ME PLS</button>
+      {/* <button onClick={props.testAction}>CLICK ME PLS</button> */}
     </Card>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
+    state,
     reduxExpenses: state.expenses,
   };
 };

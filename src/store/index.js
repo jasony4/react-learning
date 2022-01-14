@@ -1,4 +1,5 @@
 import { createStore } from "redux";
+import { updateObject } from "./util";
 
 const initialState = {
   expenses: [
@@ -17,16 +18,14 @@ const initialState = {
     },
     { date: new Date(2021, 5, 10), title: "Alcohol", amount: 250.5, id: "e4" },
   ],
-  test: false,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case "test":
-      return {
-        ...state,
+      return updateObject(state, {
         test: true,
-      };
+      });
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import NewExpense from "./components/NewExpense/NewExpense";
 import Expenses from "./components/Expenses/Expenses";
 import ExpensesChart from "./components/Expenses/ExpensesChart";
@@ -21,14 +21,12 @@ const DUMMY_EXPENSES = [
   { date: new Date(2021, 5, 10), title: "Alcohol", amount: 250.5, id: "e4" },
 ];
 
-function App() {
-  const reduxData = useSelector((state) => state);
-  const dispatch = useDispatch();
-  console.log("REDUX STATE", reduxData);
+function App(props) {
   // eslint-disable-next-line no-unused-vars
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
   const [yearFilter, setYearFilter] = useState("2020");
-
+  console.log("props expenses", props.expenses);
+  console.log("props jason", props.jason);
   const filteredExpenses = expenses.filter((expense) => {
     return expense.date.getFullYear().toString() === yearFilter;
   });
@@ -36,10 +34,6 @@ function App() {
     setExpenses((prevExpenses) => {
       return [newExpense, ...prevExpenses];
     });
-  };
-
-  const testDispatchHandler = () => {
-    dispatch({ type: "test" });
   };
 
   return (
@@ -51,9 +45,24 @@ function App() {
         setYearFilter={setYearFilter}
         items={filteredExpenses}
       />
-      <button onClick={testDispatchHandler}>TEST DISPATCH</button>
+      <button onClick={() => props.testAction()}>Click me pls</button>
     </>
   );
 }
 
-export default App;
+const dispatchTestAction = () => {
+  return { type: "test" };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return { testAction: () => dispatch({ type: "test" }) };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    expenses: state.expenses,
+    jason: state.test,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
